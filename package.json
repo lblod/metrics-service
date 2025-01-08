@@ -1,0 +1,27 @@
+{
+  "name": "metrics-service",
+  "version": "1.0.0",
+  "description": "The goal of this service is to provide a generic way for an application to expose a metrics endpoint for prometheus. This can be done in two ways: - providing .prom files in the `/external-metrics` mountpoint  - providing .js files to be executed in the `/config` mountpoint",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lblod/metrics-service.git"
+  },
+  "author": "redpencil.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lblod/metrics-service/issues"
+  },
+  "homepage": "https://github.com/lblod/metrics-service#readme",
+  "volta": {
+    "node": "20.18.1"
+  },
+  "dependencies": {
+    "@lblod/mu-auth-sudo": "^1.0.0-beta.4",
+    "node-cron": "^3.0.3",
+    "prom-client": "^15.1.3"
+  }
+}
