@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import { promises as fs } from 'fs';
 import path from 'path';
 import cron from 'node-cron';
+import promClient from 'prom-client';
 
 setupMetrics(metricProviders);
 
@@ -11,7 +12,8 @@ app.get('/metrics', async (req, res) => {
   res.set('Content-Type', 'text/plain; version=0.0.4');
   const calculatedMetrics = await Promise.all(metricProviders.map(async (m) => await m.metrics()));
   const externalMetrics = await getExternalMetrics();
-  res.end([...calculatedMetrics, ...externalMetrics].join("\n"));
+  const promClientMetrics = await promClient.register.metrics();
+  res.end([promClientMetrics,...calculatedMetrics, ...externalMetrics].join("\n"));
 });
 
 app.post("/delta-updates", bodyParser.json({ limit: '50mb' }), function(req, res) {

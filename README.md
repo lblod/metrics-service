@@ -83,7 +83,7 @@ export default {
     errorGauge.set(errorCount);
   },
   async metrics() {
-    await register.metrics();
+    // return metrics here if you do not use the global promClient register
   }
 }
 ```
