@@ -1,5 +1,5 @@
 steps:
-  build-latest:
+  build-release:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: "${CI_REPO_OWNER}/${CI_REPO_NAME}"
