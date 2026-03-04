@@ -10,7 +10,9 @@ setupMetrics(metricProviders);
 
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', 'text/plain; version=0.0.4');
-  const calculatedMetrics = await Promise.all(metricProviders.map(async (m) => await m.metrics()));
+  const calculatedMetrics = await Promise.all(
+    metricProviders.filter((m) => m.metrics).map(async (m) => await m.metrics())
+  );
   const externalMetrics = await getExternalMetrics();
   const promClientMetrics = await promClient.register.metrics();
   res.end([promClientMetrics,...calculatedMetrics, ...externalMetrics].join("\n"));
