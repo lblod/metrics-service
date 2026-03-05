@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/lblod/metrics-service#readme",
   "dependencies": {
-    "@lblod/mu-auth-sudo": "^1.0.0-beta.4",
     "node-cron": "^3.0.3",
     "prom-client": "^15.1.3"
   }

@@ -1,4 +1,4 @@
-import { app, query, errorHandler } from 'mu';
+import { app } from 'mu';
 import metricProviders from './config/index';
 import bodyParser from 'body-parser';
 import { promises as fs } from 'fs';
@@ -15,10 +15,10 @@ app.get('/metrics', async (req, res) => {
   );
   const externalMetrics = await getExternalMetrics();
   const promClientMetrics = await promClient.register.metrics();
-  res.end([promClientMetrics,...calculatedMetrics, ...externalMetrics].join("\n"));
+  res.end([promClientMetrics,...calculatedMetrics, ...externalMetrics].join('\n'));
 });
 
-app.post("/delta-updates", bodyParser.json({ limit: '50mb' }), function(req, res) {
+app.post('/delta-updates', bodyParser.json({ limit: '50mb' }), function(req, res) {
   const deltas = req.body;
   res.status(202).send('received');
   for (const provider of metricProviders) {
@@ -33,7 +33,7 @@ app.post("/delta-updates", bodyParser.json({ limit: '50mb' }), function(req, res
 });
 
 async function getExternalMetrics() {
-  const externalMetricsDir = "/external-metrics";
+  const externalMetricsDir = '/external-metrics';
    try {
     const files = await fs.readdir(externalMetricsDir);
     const promFiles = files.filter((file) => file.endsWith('.prom'));
